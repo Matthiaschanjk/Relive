@@ -202,3 +202,24 @@ footer {
 }
 /* End of Login page CSS */
 
+/* Navigation Bar CSS */
+#navigation {
+  width: 100vh;
+  height: auto;
+  background-color: #2a4759;
+  color: white;
+  border: 0;
+  padding: 0;
+}
+
+.navigationHeader {
+  color: white;
+  font-size: 2rem;
+  padding-right: 0.5rem;
+}
+
+.navigationText {
+  color: white;
+  font-size: 1rem;
+  padding-right: 0.5rem;
+}

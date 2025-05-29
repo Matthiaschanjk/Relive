@@ -1,10 +1,26 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
-import App from './App.jsx'
+import './App.css'
+import Login from'./login.jsx'
+import Header from'./header.jsx'
+import ErrorPage from './Error.jsx'
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+          <Route index element={<Login />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Login />} />
+          <Route path="*" element={<ErrorPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);

@@ -23,9 +23,9 @@ a:hover {
 }
 
 body {
-  font-family: "Noto Serif Display", sans-serif;
-  margin: 0;
-  padding: 0;
+  font-family: "Noto Serif Display", sans-serif !important;
+  margin: 0px;
+  padding: 0px;
   place-items: center;
   min-width: 100%;
   min-height: 100dvh;
