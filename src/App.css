@@ -204,7 +204,7 @@ footer {
 
 /* Navigation Bar CSS */
 #navigation {
-  width: 100vh;
+  width: 100vw;
   height: auto;
   background-color: #2a4759;
   color: white;
@@ -215,11 +215,28 @@ footer {
 .navigationHeader {
   color: white;
   font-size: 2rem;
-  padding-right: 0.5rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
 }
 
 .navigationText {
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   padding-right: 0.5rem;
+}
+
+/* End of Navigation Bar CSS */
+
+/* Home page CSS */
+.schoolLogo {
+  width: 60%;
+  height: auto;
+}
+
+/* End of Home Page CSS */
+
+/* School Pages CSS */
+.mascot {
+  width: auto;
+  height: 350px;
 }

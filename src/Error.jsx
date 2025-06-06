@@ -7,9 +7,9 @@ function ErrorPage() {
     return (
         <div>
             <Headers />
-            <div>
+            <div className="col-sm-12 text-center">
                 <h2>Error 404, couldn't find the page you are looking for</h2>
-                <img  src={ErrorGif} alt="error gif"></img>
+                <img src={ErrorGif} alt="error gif"></img>
             </div>
         </div>
     )

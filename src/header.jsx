@@ -4,28 +4,29 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { LinkContainer } from 'react-router-bootstrap';
 
+{/* Navigation Bar for Pages */}
 function Header() {
     return (
       <>
       <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" >
       <Container id="navigation">
-        <Link to="/" className="nav-link navigationHeader">Relive</Link>
+        <Link to="/home" className="nav-link navigationHeader">Relive</Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            <Nav.Link className="navigationText" href="#features">Home</Nav.Link>
-            <NavDropdown  title={<span className="navigationText">Schools</span>} id="collapsible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">NUS</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
+          <Nav className="me-auto mt-1">
+            <NavDropdown title={<span className="navigationText">Schools</span>} id="collapsible-nav-dropdown">
+              <NavDropdown.Item href="nus">NUS</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="ntu">
                 NTU
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">SMU</NavDropdown.Item>
               <NavDropdown.Divider />
+              <NavDropdown.Item href="smu">SMU</NavDropdown.Item>
             </NavDropdown>
           </Nav>
           <Nav>
+            {/* To make sure to change to Log out when users are registered */}
             <Link to="/login" className="nav-link navigationText">Login</Link>
           </Nav>
         </Navbar.Collapse>
