@@ -240,3 +240,46 @@ footer {
   width: auto;
   height: 350px;
 }
+
+/* End of School Pages CSS */
+
+/* Reviews Page CSS */
+.imageText {
+  text-align: right;
+}
+
+.imageText .MuiImageListItemBar-title {
+  font-size: 2rem;
+}
+
+.imageText .MuiImageListItemBar-subtitle {
+  padding-top: 5px;
+  font-size: 1.5rem;
+}
+
+.reviewButton {
+  height: 50px;
+}
+
+.overlay {
+   position: absolute;
+   text-align: center;
+   top: 0;
+   transition: opacity .2s ease-out;
+}
+
+.overlayTitle {
+  background-color: #2a4759;
+  color: white;
+}
+
+.overlay h3 {
+  background-color: #ff9500;
+  font-size: larger;
+}
+
+.formTextArea {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2a4759;
+}

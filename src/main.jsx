@@ -9,6 +9,7 @@ import ErrorPage from './Error.jsx';
 import Nus from "./nus.jsx"
 import Ntu from "./ntu.jsx"
 import Smu from "./smu.jsx"
+import Reviews from "./reviews.jsx"
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -23,6 +24,9 @@ export default function App() {
           <Route path="nus" element={<Nus />} />
           <Route path="ntu" element={<Ntu />} />
           <Route path="smu" element={<Smu />} />
+          {/* Dynamic Route Path for school and course */}
+          <Route path=":school/:course" element={<Reviews />} />
+          {/* Catch URL Errors and render ErrorPage */}
           <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

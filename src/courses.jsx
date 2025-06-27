@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Link } from "react-router-dom";
+import Review from "./reviews.jsx"
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -138,7 +140,7 @@ function Courses() {
                 {card.description}
               </Typography>
               <div className="d-flex justify-content-center align-self-center mt-5">
-                  <Button variant="outline-dark">Check Out Reviews!</Button>
+                <Link to={`${card.title.toLowerCase()}`}> <Button variant="outline-dark">Check Out Reviews!</Button></Link>
               </div>
             </CardContent>
           </CardActionArea>

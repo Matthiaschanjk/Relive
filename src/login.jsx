@@ -31,8 +31,10 @@ function Login() {
             <hr />
             <h2>Sign in with one time link</h2>
             <h3>We'll email you a one time sign in link (no password required)</h3>
-            <TextField  id="outlined-basic" label="Email" variant="outlined" />
-            <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined">Send Sign up Link</Button>
+            <form>
+              <TextField type="email" id="outlined-basic" label="Email" variant="outlined" />
+              <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined" type="submit">Send Sign up Link</Button>
+            </form>
           </div>
         </Grid>
         </Grid>
