@@ -265,6 +265,8 @@ footer {
    position: absolute;
    text-align: center;
    top: 0;
+   opacity: 0;
+   z-index: -1;
    transition: opacity .2s ease-out;
 }
 
@@ -283,3 +285,17 @@ footer {
   font-weight: bold;
   color: #2a4759;
 }
+
+.legendColour {
+  background-color: #2a4759;
+  width: 15px;
+  height: 15px;
+  margin-left: 10px;
+  display: inline-block;
+}
+
+
+
+
+
+

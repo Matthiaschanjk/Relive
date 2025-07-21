@@ -35,6 +35,7 @@ function Login() {
               <TextField type="email" id="outlined-basic" label="Email" variant="outlined" />
               <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined" type="submit">Send Sign up Link</Button>
             </form>
+            <h3 className="mx-1 mt-2">or, continue as <a href="/home">Guest</a></h3>
           </div>
         </Grid>
         </Grid>

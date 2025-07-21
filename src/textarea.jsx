@@ -23,7 +23,7 @@ function TextareaWithValidation({ onChange, onValidChange }) {
   return (
     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
       <Form.Label className="formTextArea">
-        How was the <span style={{ color: '#ff9500' }}>course?</span>
+        How was the <span style={{ color: '#ff9500' }}>Course?</span>
       </Form.Label>
       <div className="d-flex justify-content-center">
         <Form.Control
@@ -34,7 +34,7 @@ function TextareaWithValidation({ onChange, onValidChange }) {
           value={text}
           onChange={handleChange}
           isInvalid={!!error}
-          placeholder="Tell us about your experience..."
+          placeholder="Tell us about your experience? What would you like to tell your juniors....."
         />
       </div>
       <Form.Control.Feedback type="invalid" className="d-block">

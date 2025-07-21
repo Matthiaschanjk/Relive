@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import './App.css'
 import Login from'./login.jsx';
-import Home from "./home.jsx";
+import Home from './home.jsx';
 import ErrorPage from './Error.jsx';
 import Nus from "./nus.jsx"
 import Ntu from "./ntu.jsx"

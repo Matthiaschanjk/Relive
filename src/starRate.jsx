@@ -12,7 +12,7 @@ function StarRate({onRate}) {
 
   return (
     <div>
-    <h2><span style={{color:'#2a4759'}}>Rate</span> Your Course:</h2>
+    <h2><span style={{color:'#ff9500'}}>Rate</span> Your Course:</h2>
       {[...Array(5)].map((star, index) => {
         const currentRate = index + 1;
         return (
