@@ -34,7 +34,7 @@ export default function App() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const clientID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const clientID = import.meta.env.GOOGLE_CLIENT_ID;
 root.render(
     <GoogleOAuthProvider clientId= {clientID}>
       <AuthProvider>
