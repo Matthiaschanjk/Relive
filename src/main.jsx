@@ -1,5 +1,3 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 import './App.css'
@@ -12,6 +10,8 @@ import Smu from "./smu.jsx"
 import Reviews from "./reviews.jsx"
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { AuthProvider } from './AuthContext';
 
 export default function App() {
   return (
@@ -34,4 +34,11 @@ export default function App() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<App />);
+const clientID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+root.render(
+    <GoogleOAuthProvider clientId= {clientID}>
+      <AuthProvider>
+      <App />
+      </AuthProvider>
+    </GoogleOAuthProvider>
+);

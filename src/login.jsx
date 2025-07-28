@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useState} from "react";
 import student_logo from './assets/students.png';
 import film from './assets/film.png';
 import Grid from '@mui/material/Grid';
@@ -6,9 +6,79 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import GoogleIcon from '@mui/icons-material/Google';
 import TextField from '@mui/material/TextField';
+import { useGoogleLogin } from '@react-oauth/google';
+import { supabase } from './supabaseClient.js';
+import { useNavigate } from 'react-router-dom';
 
 {/*log in page*/}
 function Login() {
+const navigate = useNavigate();
+const [email, setEmail] = useState("");
+const login = useGoogleLogin({
+  onSuccess: async (tokenResponse) => {
+
+    try {
+      const res = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: {
+          Authorization: `Bearer ${tokenResponse.access_token}`,
+        },
+      });
+
+      if (!res.ok) throw new Error("Failed to fetch user info");
+
+      const user = await res.json();
+        const { data, error } = await supabase
+          .from('users')
+          .select()
+          .eq('email', user.email)
+        
+        if (error) {
+          console.error("Supabase error:", error);
+        } else if (data.length > 0) {
+          console.log("Email exists");
+          navigate('/home')
+        } else {
+          console.log("Email does not exist");
+          const {error} = await supabase
+          .from('users')
+          .insert({email: user.email, name: user.name, verified: "false", sign_in_by: "Google"})
+
+          if (error) {
+            console.log("There was an error inserting data: ", error)
+          } else {
+            console.log("user updated successfully")
+            navigate('/home')
+          }
+        }
+      
+    } catch (err) {
+      console.error("Error fetching user info:", err);
+    }
+  },
+});
+
+const emailLogin = async (user) => {
+  const { data, error } = await supabase
+    .from('users')
+    .select()
+    .eq('email', email);
+  if (error) {
+    console.error("Supabase error:", error);
+    return;
+  }
+
+  if (data.length > 0) {
+    console.log("Email exists");
+    navigate('/home')
+  } else {
+    console.log("Email does not exist");
+    const {error} = await supabase
+    .from('users')
+    .insert({email: email, verified: email.includes("edu"), sign_in_by: "Email"})
+    navigate('/home')
+  }
+};
+
 
     return (
         <div className="full">
@@ -25,15 +95,15 @@ function Login() {
           <h3>Rate your University Courses</h3>
           <div className="login-text">
             <h2>Sign in With Google</h2>
-            <Button className="google-text" color="warning" variant="outlined" startIcon={<GoogleIcon />}>
+            <Button className="google-text" color="warning" variant="outlined" startIcon={<GoogleIcon />} onClick={() => login()}>
             Sign in with Google
             </Button>
             <hr />
             <h2>Sign in with one time link</h2>
-            <h3>We'll email you a one time sign in link (no password required)</h3>
+            <h3>Sign up here using your email! (no password required)</h3>
             <form>
-              <TextField type="email" id="outlined-basic" label="Email" variant="outlined" />
-              <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined" type="submit">Send Sign up Link</Button>
+              <TextField type="email" id="outlined-basic" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
+              <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined" onClick={emailLogin}>Sign up</Button>
             </form>
             <h3 className="mx-1 mt-2">or, continue as <a href="/home">Guest</a></h3>
           </div>
