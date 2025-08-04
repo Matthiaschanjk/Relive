@@ -57,7 +57,9 @@ const login = useGoogleLogin({
   },
 });
 
-const emailLogin = async (user) => {
+const emailLogin = async (e) => {
+  e.preventDefault(); 
+
   const { data, error } = await supabase
     .from('users')
     .select()
@@ -72,10 +74,16 @@ const emailLogin = async (user) => {
     navigate('/home')
   } else {
     console.log("Email does not exist");
-    const {error} = await supabase
+    const {error: insertError} = await supabase
     .from('users')
     .insert({email: email, verified: email.includes("edu"), sign_in_by: "Email"})
-    navigate('/home')
+
+    if (insertError) {
+      console.error("Insert error:", insertError);
+      return;
+    }
+
+    navigate('/home');
   }
 };
 
@@ -101,9 +109,9 @@ const emailLogin = async (user) => {
             <hr />
             <h2>Sign in with one time link</h2>
             <h3>Sign up here using your email! (no password required)</h3>
-            <form>
-              <TextField type="email" id="outlined-basic" label="Email" variant="outlined" onChange={(e) => setEmail(e.target.value)} />
-              <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined" onClick={emailLogin}>Sign up</Button>
+            <form onSubmit={emailLogin}>
+              <TextField type="email" id="outlined-basic" label="Email" value={email} variant="outlined" onChange={(e) => setEmail(e.target.value)} required />
+              <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined" type="submit">Sign up</Button>
             </form>
             <h3 className="mx-1 mt-2">or, continue as <a href="/home">Guest</a></h3>
           </div>
