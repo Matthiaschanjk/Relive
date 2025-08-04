@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./header.jsx"
-import smuMascot from "./assets/smuMascot.png"
+import smuMascot from "./assets/smumascot.png"
 import Courses from "./courses.jsx"
 import AddCourses from "./addCourse.jsx";
 
