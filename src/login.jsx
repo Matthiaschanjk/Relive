@@ -113,7 +113,6 @@ const emailLogin = async (e) => {
               <TextField type="email" id="outlined-basic" label="Email" value={email} variant="outlined" onChange={(e) => setEmail(e.target.value)} required />
               <Button id="signUp"sx={{ml: 1}}color="warning" variant="outlined" type="submit">Sign up</Button>
             </form>
-            <h3 className="mx-1 mt-2">or, continue as <a href="/home">Guest</a></h3>
           </div>
         </Grid>
         </Grid>
