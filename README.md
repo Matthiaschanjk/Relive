@@ -36,6 +36,8 @@ _Just as books let us live other lives, Relive lets us learn from real ones._
 **Users can Submit Course Review**
 <img width="1902" height="867" alt="Screenshot 2025-08-09 232313" src="https://github.com/user-attachments/assets/347be789-a209-4fd5-a323-25f8ac288c35" />
 
+**Try it here! Do set your browser to 75% Zoom for the best experience!**
+https://relive-git-master-matthiaschanjks-projects.vercel.app/
 
 
 
