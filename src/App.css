@@ -1,0 +1,285 @@
+/* ─── Login Page ─────────────────────────────────────────────────────────── */
+
+.login-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
+  background-color: white;
+}
+
+.login-left {
+  display: flex;
+  flex-direction: column;
+  padding: 3.5rem 5rem 3rem 4rem;
+  background: white;
+  min-height: 100vh;
+}
+
+.login-brand {
+  font-family: "Noto Serif Display", serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  color: var(--clr-navy);
+}
+
+.login-form-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 360px;
+}
+
+.login-heading {
+  font-family: "Noto Serif Display", serif;
+  font-size: 2.75rem;
+  font-weight: 700;
+  color: var(--clr-ink);
+  line-height: 1.1;
+  margin: 0 0 0.4rem;
+}
+
+.login-sub {
+  font-size: 0.9rem;
+  color: #999;
+  margin: 0 0 2.25rem;
+  font-style: italic;
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.25rem 0;
+  font-size: 0.8rem;
+  color: #bbb;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e8e8e8;
+}
+
+.login-footer-text {
+  font-size: 0.78rem;
+  color: #c0b9b0;
+  font-style: italic;
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+.login-right {
+  position: relative;
+  overflow: hidden;
+  background-color: white;
+}
+
+.login-hero-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: clamp(340px, 88vh, 820px);
+  width: auto;
+  max-width: 96%;
+  object-fit: contain;
+}
+
+.login-film {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: clamp(280px, 72vh, 680px);
+  width: auto;
+  max-width: 92%;
+  opacity: 0.82;
+}
+
+.login-badge {
+  position: absolute;
+  background: white;
+  border-radius: 50px;
+  padding: 0.55rem 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.09);
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+  white-space: nowrap;
+}
+
+.login-badge-top {
+  top: 2rem;
+  left: 2rem;
+}
+
+.login-badge-bottom {
+  bottom: 2.5rem;
+  right: 2rem;
+}
+
+.login-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--clr-red);
+  flex-shrink: 0;
+}
+
+.moveImage {
+  animation-name: myImage;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-duration: 3s;
+}
+
+@keyframes myImage {
+  from { transform: translate(-50%, -50%) translateY(-10px); }
+  to   { transform: translate(-50%, -50%) translateY(10px); }
+}
+
+@media (max-width: 768px) {
+  .login-container { grid-template-columns: 1fr; }
+  .login-right { display: none; }
+  .login-left { padding: 2.5rem 2rem; }
+}
+
+/* ─── Navigation Bar ─────────────────────────────────────────────────────── */
+
+#navigation {
+  width: 100vw;
+  height: auto;
+  background-color: var(--clr-navy);
+  color: white;
+  border: 0;
+  padding: 0;
+  border-bottom: 2px solid var(--clr-red);
+}
+
+.navigationHeader {
+  font-family: "Noto Serif Display", serif;
+  color: white;
+  font-size: 1.75rem;
+  font-weight: 600;
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+.navigationText {
+  color: white;
+  font-size: var(--text-base);
+  padding-right: 0.5rem;
+}
+
+/* ─── Home Page ──────────────────────────────────────────────────────────── */
+
+.schoolLogo {
+  width: 60%;
+  height: auto;
+}
+
+/* ─── School Pages ───────────────────────────────────────────────────────── */
+
+.mascot {
+  width: auto;
+  height: 350px;
+}
+
+/* ─── Heading Scale ──────────────────────────────────────────────────────── */
+
+/* Page-level section headings (Summary of Reviews, Browse N Reviews, etc.) */
+h2 {
+  font-family: "Noto Serif Display", serif;
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: black;
+}
+
+/* Sub-section labels (Overall Course Rating, Review Demographics) */
+h3 {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: black;
+}
+
+/* ─── Reviews Page ───────────────────────────────────────────────────────── */
+
+.imageText { text-align: right; }
+
+.imageText .MuiImageListItemBar-title { font-size: 2rem; }
+
+.imageText .MuiImageListItemBar-subtitle {
+  padding-top: 5px;
+  font-size: 1.25rem;
+}
+
+.reviewButton { height: 50px; }
+
+/* ─── Overlay / Form Panel ───────────────────────────────────────────────── */
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: min(560px, 93vw);
+  overflow-y: auto;
+  background: white;
+  box-shadow: -6px 0 32px rgba(0, 0, 0, 0.14);
+  opacity: 0;
+  z-index: -1;
+}
+
+.overlayTitle {
+  background-color: var(--clr-navy);
+  color: white;
+}
+
+/* Form field headings inside the overlay panel (e.g. "Which Year", "Rate Your Course") */
+.overlay h2 {
+  font-family: "Noto Serif", Georgia, serif;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: black;
+}
+
+/* Modal title overrides — must come after .overlay h2 to win at equal specificity */
+.overlayTitle h2 {
+  font-family: "Noto Serif Display", serif;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: white;
+}
+
+/* Course name badge below the modal title */
+.overlay h3 {
+  background-color: var(--clr-red);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.formTextArea {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--clr-navy);
+}
+
+/* ─── Misc ───────────────────────────────────────────────────────────────── */
+
+.legendColour {
+  background-color: var(--clr-navy);
+  width: 15px;
+  height: 15px;
+  margin-left: 10px;
+  display: inline-block;
+}
