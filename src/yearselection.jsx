@@ -20,9 +20,8 @@ function YearSelection({onSelect}) {
   };
 
   return (
-    <div className="mx-5">
-    <h2>Which <span style={{color:"#ff9500"}}>Year</span> Are You In?</h2>
-    <div className="d-flex flex-column mx-5 text-start">
+    <div>
+    <div className="d-flex flex-column text-start">
       {yearOptions.map((year, index) => (
         <Form.Check
           required
@@ -38,7 +37,7 @@ function YearSelection({onSelect}) {
         />
       ))}
 
-      <p className="mt-2 mx-1"><span style={{color: '#2a4759'}}>Selected:</span> {selectedYear}</p>
+      <p className="mt-2 mx-1"><span>Selected:</span> {selectedYear}</p>
     </div>
     </div>
   );

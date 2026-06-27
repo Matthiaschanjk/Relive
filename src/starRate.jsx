@@ -3,7 +3,6 @@ import { FaStar } from "react-icons/fa";
 
 function StarRate({onRate}) {
   const [rating, setRating] = useState(null);
-  const [rateColor, setColor] = useState(null); 
 
   const handleRate = (currentRate) => {
     setRating(currentRate);
@@ -11,8 +10,7 @@ function StarRate({onRate}) {
   }
 
   return (
-    <div>
-    <h2><span style={{color:'#ff9500'}}>Rate</span> Your Course:</h2>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '4px' }}>
       {[...Array(5)].map((star, index) => {
         const currentRate = index + 1;
         return (
@@ -28,7 +26,7 @@ function StarRate({onRate}) {
             />
             <FaStar
               size={50}
-              color={currentRate <= (rating || rateColor) ? "gold" : "lightgrey"}
+              color={currentRate <= rating ? "gold" : "lightgrey"}
               style={{ cursor: "pointer" }}
             />
           </label>

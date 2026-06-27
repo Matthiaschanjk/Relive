@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
 function TextareaWithValidation({ onChange, onValidChange }) {
@@ -23,7 +23,7 @@ function TextareaWithValidation({ onChange, onValidChange }) {
   return (
     <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
       <Form.Label className="formTextArea">
-        How was the <span style={{ color: '#ff9500' }}>Course?</span>
+        How was the <span style={{ color: 'var(--clr-red)' }}>Course?</span>
       </Form.Label>
       <div className="d-flex justify-content-center">
         <Form.Control

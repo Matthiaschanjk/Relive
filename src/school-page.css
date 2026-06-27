@@ -1,0 +1,285 @@
+/* ─── School Page – Shared Newspaper Styles ──────────────────────────────── */
+/* Per-school accent: set --sp-accent via inline style on .sp-page           */
+
+.sp-page {
+  --st-navy:   #0a1e3d;
+  --st-cream:  #faf8f2;
+  --st-ink:    #1a1a1a;
+  --st-muted:  #5a5a5a;
+  --st-border: #c8c0a8;
+
+  background: var(--st-cream);
+  min-height: 100vh;
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+
+/* ── Masthead ─────────────────────────────────────────────────────────────── */
+
+.sp-masthead {
+  background: var(--st-navy);
+  border-bottom: 3px solid var(--sp-accent);
+  padding: 1.75rem 0 1.5rem;
+}
+
+.sp-masthead-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  text-align: center;
+}
+
+.sp-section-kicker {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--sp-accent);
+  margin: 0 0 0.5rem;
+}
+
+.sp-nameplate {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.4rem, 4.2vw, 2.5rem);
+  font-weight: 900;
+  color: var(--sp-accent);
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin: 0 0 0.45rem;
+  text-transform: uppercase;
+}
+
+.sp-tagline {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.38);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* ── Body ─────────────────────────────────────────────────────────────────── */
+
+.sp-body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 7rem;
+}
+
+/* ── Section Chrome ───────────────────────────────────────────────────────── */
+
+.st-rule-heavy {
+  border: none;
+  border-top: 2px solid var(--st-ink);
+  margin: 0 0 2px;
+}
+
+.st-rule-light {
+  border: none;
+  border-top: 1px solid var(--st-border);
+  margin: 4px 0 1.25rem;
+}
+
+.st-section-label {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--st-muted);
+  margin: 0;
+  line-height: 1.8;
+}
+
+/* ── Kicker (faculty label on course cards) ───────────────────────────────── */
+
+.st-kicker {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--sp-accent);
+  margin: 0 0 0.4rem;
+}
+
+/* ── Lead Area ────────────────────────────────────────────────────────────── */
+
+.sp-lead-area {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--st-border);
+}
+
+.sp-lead-area.two-col {
+  grid-template-columns: 5fr 3fr;
+}
+
+.sp-lead-area.two-col .sp-lead-main {
+  padding-right: 2rem;
+  border-right: 1px solid var(--st-border);
+}
+
+.sp-lead-area.two-col .sp-lead-secondary {
+  padding-left: 2rem;
+}
+
+/* ── Headlines ────────────────────────────────────────────────────────────── */
+
+.sp-headline-xl,
+.sp-headline-lg,
+.sp-headline-md {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  line-height: 1.18;
+  color: var(--st-ink);
+  display: block;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.sp-headline-xl { font-size: clamp(1.35rem, 2.8vw, 1.85rem); margin-bottom: 0.55rem; }
+.sp-headline-lg { font-size: clamp(1.05rem, 2.2vw, 1.3rem);  margin-bottom: 0.45rem; }
+.sp-headline-md { font-size: 1.05rem;                          margin-bottom: 0.4rem;  }
+
+.sp-headline-xl:hover,
+.sp-headline-lg:hover,
+.sp-headline-md:hover {
+  color: var(--st-navy);
+}
+
+/* ── Excerpts ─────────────────────────────────────────────────────────────── */
+
+.sp-excerpt,
+.sp-excerpt-sm {
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--st-muted);
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sp-excerpt    { font-size: 0.875rem; -webkit-line-clamp: 4; margin-bottom: 0.75rem; }
+.sp-excerpt-sm { font-size: 0.8rem;   -webkit-line-clamp: 3; margin-bottom: 0.5rem;  }
+
+/* ── Read More ────────────────────────────────────────────────────────────── */
+
+.sp-read-more {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--sp-accent);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.sp-read-more:hover {
+  color: var(--st-navy);
+  text-decoration: underline;
+}
+
+/* ── Course Grid ──────────────────────────────────────────────────────────── */
+
+.sp-course-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.sp-course-card {
+  padding: 1.25rem 1.5rem 1.25rem 0;
+  border-bottom: 1px solid var(--st-border);
+}
+
+.sp-course-card:nth-child(3n+2) {
+  padding: 1.25rem 1.5rem;
+  border-left: 1px solid var(--st-border);
+  border-right: 1px solid var(--st-border);
+}
+
+.sp-course-card:nth-child(3n) {
+  padding: 1.25rem 0 1.25rem 1.5rem;
+}
+
+/* ── Floating Action Button ───────────────────────────────────────────────── */
+
+.sp-fab {
+  position: fixed;
+  bottom: 1.75rem;
+  right: 1.75rem;
+  background: var(--sp-accent);
+  color: white;
+  border: none;
+  border-radius: 2px;
+  padding: 0.72rem 1.2rem;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 50;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.22);
+  line-height: 1;
+  transition: background 0.15s;
+}
+
+.sp-fab:hover {
+  background: var(--st-navy);
+  border-color: transparent;
+}
+
+/* ── Empty State ──────────────────────────────────────────────────────────── */
+
+.sp-empty {
+  padding: 5rem 2rem;
+  text-align: center;
+  font-style: italic;
+  color: var(--st-muted);
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .sp-masthead { padding: 1.25rem 0 1rem; }
+  .sp-nameplate { letter-spacing: 0.02em; }
+
+  .sp-lead-area.two-col { grid-template-columns: 1fr; }
+  .sp-lead-area.two-col .sp-lead-main {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid var(--st-border);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+  .sp-lead-area.two-col .sp-lead-secondary { padding-left: 0; }
+
+  .sp-course-grid { grid-template-columns: 1fr; }
+  .sp-course-card,
+  .sp-course-card:nth-child(3n+2),
+  .sp-course-card:nth-child(3n) {
+    padding: 1rem 0;
+    border-left: none;
+    border-right: none;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 860px) {
+  .sp-course-grid { grid-template-columns: repeat(2, 1fr); }
+  .sp-course-card,
+  .sp-course-card:nth-child(3n+2),
+  .sp-course-card:nth-child(3n) {
+    padding: 1.25rem 1.5rem 1.25rem 0;
+    border-left: none;
+    border-right: 1px solid var(--st-border);
+  }
+  .sp-course-card:nth-child(even) {
+    padding: 1.25rem 0 1.25rem 1.5rem;
+    border-right: none;
+  }
+}

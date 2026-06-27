@@ -25,3 +25,11 @@ dist-ssr
 
 #.env files
 .env
+
+# Playwright
+test-results
+playwright-report
+blob-report
+
+# Supabase CLI local state
+supabase/.temp

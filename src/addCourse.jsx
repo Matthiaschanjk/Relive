@@ -1,151 +1,198 @@
-import React, {useState} from "react"
+import { useState } from "react";
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
-import Box from '@mui/material/Box';
 import Dropdown from 'react-bootstrap/Dropdown';
 import CloseIcon from '@mui/icons-material/Close';
 import { supabase } from './supabaseClient.js';
+import { useAuth } from './AuthContext.jsx';
+import { motion, AnimatePresence } from "framer-motion";
 
-function AddCourses( {school}) {
-const [selectedSchool, setSelectedSchool] = useState("Choose a School");
-const [courseName, setCourseName] = useState("");
-const [courseSchool, setCourseSchool] = useState("")
-const [courseDesc, setCourseDesc] = useState("")
-const [schoolError, setSchoolError] = useState(true);
+const displaySchoolMap = {
+  ntu: "Nanyang Technological University",
+  nus: "National University of Singapore",
+  smu: "Singapore Management University",
+};
 
-let displaySchool;
+function AddCourses({ school, open: openProp, onOpenChange }) {
+  const [internalOpen, setInternalOpen] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState("Choose a School");
+  const [courseName, setCourseName] = useState("");
+  const [courseSchool, setCourseSchool] = useState("");
+  const [courseDesc, setCourseDesc] = useState("");
+  const [schoolError, setSchoolError] = useState(true);
+  const [submitError, setSubmitError] = useState("");
+  const [submitSuccess, setSubmitSuccess] = useState("");
 
-if (school === "ntu") {
-  displaySchool = "Nanyang Technological University";
-} else if (school === "nus") {
-  displaySchool = "National University of Singapore";
-} else if (school === "smu") {
-  displaySchool = "Singapore Management University";
-} else {
-  displaySchool = "add your course!"; // fallback to raw string
-}
+  const { user } = useAuth();
+  const isControlled = openProp !== undefined;
+  const showOverlay = isControlled ? openProp : internalOpen;
+  const displaySchool = displaySchoolMap[school] ?? "Add your course!";
 
-const handleSelectSchool = (school) => {
-    setSelectedSchool(school);
+  const toggleOverlay = () => {
+    if (isControlled) onOpenChange?.(!openProp);
+    else setInternalOpen(prev => !prev);
+  };
+
+  const handleSelectSchool = (value) => {
+    setSelectedSchool(value);
     setSchoolError(false);
   };
 
-function submitCourses() {
-  const overlayDiv = document.querySelector(".overlay");
-  const currentOpacity = window.getComputedStyle(overlayDiv).opacity;
+  const addCourses = async (e) => {
+    e.preventDefault();
+    setSubmitError("");
+    setSubmitSuccess("");
 
-  if (currentOpacity === "0") {
-    overlayDiv.style.opacity = 0.95;
-    overlayDiv.style.zIndex = 10;
-  } else {
-    overlayDiv.style.opacity = 0;
-    overlayDiv.style.zIndex = -1;
-  }
-}
-
-const addCourses = async (e) => {
-  e.preventDefault();
-  const {error} = await supabase
-  .from("courses")
-  .insert({
-    school: selectedSchool,
-    course: courseName,
-    description: courseDesc,
-    faculty: courseSchool
-  })
-
-  if (error) {
-    alert('There was an error in inserting data.');
-    console.error(error);
-  } else {
-    setCourseName("")
-    setCourseSchool("")
-    setCourseDesc("")
-    setSelectedSchool("Choose a School")
-    console.log("data inserted correctly");
-    submitCourses();
+    if (!user) {
+      setSubmitError("You must be logged in to add a course.");
+      return;
     }
-}
 
-    return (
-        <>
+    // status is forced to 'pending' server-side by a trigger — admins approve it.
+    const { error } = await supabase
+      .from("courses")
+      .insert({ school: selectedSchool, course: courseName, description: courseDesc, faculty: courseSchool });
+
+    if (error) {
+      setSubmitError("There was an error submitting the course. Please try again.");
+    } else {
+      setCourseName("");
+      setCourseSchool("");
+      setCourseDesc("");
+      setSelectedSchool("Choose a School");
+      setSchoolError(true);
+      setSubmitSuccess("Course submitted — it'll appear once approved.");
+    }
+  };
+
+  return (
+    <>
+      {!isControlled && (
         <div className="d-flex flex-row-reverse bd-highlight mb-3">
-            <Button variant="warning" size="lg" onClick={submitCourses}>Add Course</Button>
+          <Button variant="warning" size="lg" onClick={toggleOverlay}>Add Course</Button>
         </div>
-        <Container className="overlay" sx={{
-                opacity: 0,
-                zIndex: -1,
-                width: {
-                  xs: '90%',   // Small screens
-                  sm: '80%',
-                  md: '70%',
-                  lg: '60%',
-                },
-                maxWidth: 'none', 
-                mx: {
-                  lg: 8
-                }         // Center horizontally
-              }}>
-            <Box sx={{ bgcolor: '#cfe8fc', height:'100vh' }}>
-              <div className="overlayTitle position-relative d-flex justify-content-center align-items-center">
-                <h2 className="m-0">Add a Course</h2>
-                <CloseIcon className="position-absolute end-0 me-3" onClick={submitCourses} 
-                sx={{
-                    cursor: 'pointer',
-                    transition: 'all 0.2s ease-in-out',
-                    '&:hover': {
-                      transform: 'scale(0.9)', 
-                      opacity: 0.8,                 
-                    },
-                    '&:active': {
-                      transform: 'scale(0.85)', 
-                      opacity: 0.6,
-                    },
-                    }} />
-              </div>
-              <h3>{displaySchool}</h3>
+      )}
 
-              {/* Form Creation */}
-    <Form className="mt-5">
-        <Container>
-            <Row>
-                 <div className="d-flex justify-content-center">
-                    <Row>
-                    <Form.Control className="mb-3" as="textarea" placeholder="Computer Science" style={{width:'100%'}} value={courseName} onChange={(e) => setCourseName(e.target.value)} required/>
-                    <Form.Control className="mb-3"as="textarea" placeholder="School of Computing" style={{width:'100%'}} value={courseSchool} onChange={(e) => setCourseSchool(e.target.value)} required/>
-                        <Form.Control className="mb-3"as="textarea" rows={4} placeholder="Description of Course" style={{width:'100%'}} value={courseDesc} onChange={(e) => setCourseDesc(e.target.value)} required/>
-                    </Row>
-                </div>
-                <Dropdown onSelect={handleSelectSchool} required>
-                <Dropdown.Toggle variant="info" id="dropdown-basic">
+      <AnimatePresence>
+        {showOverlay && (
+          <motion.div
+            className="overlay"
+            initial={{ x: '100%', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: '100%', opacity: 0 }}
+            transition={{ type: 'spring', stiffness: 320, damping: 32 }}
+            style={{ zIndex: 100 }}
+          >
+            {/* Header */}
+            <div className="overlayTitle" style={{
+              padding: '1.25rem 1.5rem',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              position: 'sticky',
+              top: 0,
+              zIndex: 1,
+            }}>
+              <div>
+                <h2 className="m-0" style={{ color: 'white', fontSize: '1.4rem' }}>Add a Course</h2>
+                <span style={{ fontSize: '0.75rem', opacity: 0.7, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  {displaySchool}
+                </span>
+              </div>
+              <CloseIcon
+                onClick={toggleOverlay}
+                sx={{ cursor: 'pointer', color: 'white', '&:hover': { opacity: 0.7 } }}
+              />
+            </div>
+
+            {/* Body */}
+            <div style={{ padding: '1.5rem 1.5rem 2rem' }}>
+              <Form onSubmit={addCourses}>
+                <Form.Control
+                  className="mb-3"
+                  type="text"
+                  placeholder="Course Name (e.g. Computer Science)"
+                  value={courseName}
+                  onChange={(e) => setCourseName(e.target.value)}
+                  required
+                />
+                <Form.Control
+                  className="mb-3"
+                  type="text"
+                  placeholder="Faculty (e.g. School of Computing)"
+                  value={courseSchool}
+                  onChange={(e) => setCourseSchool(e.target.value)}
+                  required
+                />
+                <Form.Control
+                  className="mb-3"
+                  as="textarea"
+                  rows={4}
+                  placeholder="Description of Course"
+                  value={courseDesc}
+                  onChange={(e) => setCourseDesc(e.target.value)}
+                  required
+                />
+
+                <Dropdown onSelect={handleSelectSchool} className="mb-2">
+                  <Dropdown.Toggle variant="outline-secondary" id="dropdown-basic">
                     {selectedSchool}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
+                  </Dropdown.Toggle>
+                  <Dropdown.Menu>
                     <Dropdown.Item eventKey="NUS">NUS</Dropdown.Item>
                     <Dropdown.Item eventKey="NTU">NTU</Dropdown.Item>
                     <Dropdown.Item eventKey="SMU">SMU</Dropdown.Item>
-                </Dropdown.Menu>
-                    </Dropdown>
+                  </Dropdown.Menu>
+                </Dropdown>
+
                 {schoolError && (
-                    <div style={{ color: "red", marginTop: "5px" }}>
-                        Please select a school.
-                        </div>
+                  <p style={{ color: 'var(--clr-red)', fontSize: '0.82rem', marginBottom: '0.75rem' }}>
+                    Please select a school.
+                  </p>
                 )}
-                    </Row>
-                </Container>
-                <div className="d-flex justify-content-center mt-3">
-                <Button type="submit" disabled={schoolError} onClick={addCourses}>
-                    Submit
-                </Button>
-                </div>
-                <span style={{fontStyle: "italic", color: "red"}}>*Adding a course is subjected to approval</span>
-            </Form>
-            </Box>
-          </Container>
-        </>
-    )
+
+                {submitError && (
+                  <p style={{ color: 'var(--clr-red)', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                    {submitError}
+                  </p>
+                )}
+
+                {submitSuccess && (
+                  <p style={{ color: '#2e7d32', fontSize: '0.85rem', marginBottom: '0.75rem' }}>
+                    {submitSuccess}
+                  </p>
+                )}
+
+                <p style={{ fontStyle: 'italic', fontSize: '0.8rem', color: '#999', marginBottom: '1rem' }}>
+                  * Submitted courses are reviewed before they appear in the directory. Please double-check the details.
+                </p>
+
+                <button
+                  type="submit"
+                  disabled={schoolError}
+                  style={{
+                    width: '100%',
+                    padding: '0.75rem',
+                    background: schoolError ? '#ccc' : 'var(--clr-red)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: '8px',
+                    fontSize: '0.95rem',
+                    fontWeight: 600,
+                    cursor: schoolError ? 'not-allowed' : 'pointer',
+                    fontFamily: 'inherit',
+                    transition: 'background 0.2s',
+                  }}
+                >
+                  Submit Course
+                </button>
+              </Form>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
 }
 
-export default AddCourses
+export default AddCourses;
